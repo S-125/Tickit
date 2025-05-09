@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/update.css') }}">
+    <title>Update</title>
+</head>
+<body>
+    
+    <form method="POST" action="{{ url_for('update', todo_id=todo.id) }}">
+        <h1>Update Todo</h1>
+        <input type="text" name="title" value="{{ todo.title }}" required>
+        <textarea name="description" rows="4">{{ todo.description }}</textarea>
+        <button type="submit">Update</button>
+         <br/><a href="{{ url_for('index') }}">Back to Todo List</a>
+    </form>
+
+   
+</body>
+</html>
