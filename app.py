@@ -53,7 +53,6 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash('Logged out successfully!', 'success')
     return redirect(url_for('home'))
 
 @app.route('/index', methods=['GET'])
@@ -88,9 +87,6 @@ def delete(todo_id):
     if todo and todo.user_id == current_user.id:
         db.session.delete(todo)
         db.session.commit()
-        flash('Todo deleted successfully!', 'success')
-    else:
-        flash('Todo not found or you do not have permission to delete it.', 'danger')
     return redirect(url_for('index'))
 
 @app.route('/toggle/<int:todo_id>', methods=['POST'])
@@ -100,9 +96,6 @@ def toggle(todo_id):
     if todo:
         todo.completed = not todo.completed
         db.session.commit()
-        flash('Todo updated!', 'success')
-    else:
-        flash('Todo not found or unauthorized.', 'danger')
     return redirect(url_for('index'))
 
 @app.route('/update/<int:todo_id>', methods=['GET', 'POST'])
@@ -113,7 +106,6 @@ def update(todo_id):
         todo.title = request.form['title']
         todo.description = request.form['description']
         db.session.commit()
-        flash('Todo updated successfully!', 'success')
         return redirect(url_for('index'))
     return render_template('update.html', todo=todo)
 
